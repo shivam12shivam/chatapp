@@ -1,5 +1,5 @@
 import './App.css'
-import { useEffect, useState  } from 'react'
+import { useEffect, useState } from 'react'
 import Home from './home'
 import Signin from './components/signin'
 import Signup from './components/Signup'
@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { setUser } from './redux/userSlice'
 import axios from 'axios'
+import { SocketProvider } from './Socket/SocketContext'
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -35,14 +36,16 @@ function App() {
   if (loading) return null;
 
   return (
-    <Routes>
-      <Route path="/" element={isAuthenticated ? (
-        <Home />
-      ) : <Navigate to="/signin" />} />
-      <Route path="/signin" element={<Signin />} />
-      <Route path="/signup" element={<Signup />} />
+    <SocketProvider>
+      <Routes>
+        <Route path="/" element={isAuthenticated ? (
+          <Home />
+        ) : <Navigate to="/signin" />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
 
-    </Routes>
+      </Routes>
+    </SocketProvider>
   )
 }
 

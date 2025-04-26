@@ -3,7 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   user: null,
   isAuthenticated: false,
-  loading: true // Add loading state
+  loading: true,
+  selectedUserId: null,
+  selectedUsername:null,
+  messages: []
 };
 
 const authSlice = createSlice({
@@ -17,15 +20,18 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.isAuthenticated = false;
-      localStorage.removeItem("token");
+    },
+    setSelectedUser: (state, action) => {
+      state.selectedUserId = action.payload; // Add this reducer
+    },
+    setSelectedUsername: (state, action) => {
+      state.selectedUsername = action.payload; // Add this reducer
+    },
+    setMessages: (state, action) => {
+      state.messages = action.payload;
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase('REHYDRATE', (state) => {
-      state.loading = false;
-    });
-  }
 });
 
-export const { setUser, logout } = authSlice.actions;
+export const { setUser, logout, setSelectedUser, setMessages, setSelectedUsername} = authSlice.actions;
 export default authSlice.reducer;

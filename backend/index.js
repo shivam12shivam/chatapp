@@ -4,11 +4,12 @@ import mongoose from "mongoose";
 import router from "./routes/userroute.js"
 import cors from "cors"
 import cookieParser from 'cookie-parser';
-
+import messageRoute from "./routes/messageroute.js"
+import { app, server } from "./SocketIO/server.js";
 dotenv.config();
-const app=express();
+
 app.use(cookieParser());
-const Port=process.env.port || 3001;
+const Port=process.env.port || 3000;
 const mongourl=process.env.Url;
 app.use(cors({
     origin: "http://localhost:5173",  // your frontend URL
@@ -25,7 +26,8 @@ try {
 
 app.use(express.json());
 app.use("/user",router);
+app.use("/message", messageRoute);
 
-app.listen(Port,()=>{
+server.listen(Port,()=>{
     console.log(`app is running at port ${Port}`);
 });

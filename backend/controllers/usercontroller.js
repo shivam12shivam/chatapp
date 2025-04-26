@@ -69,10 +69,27 @@ export const signin = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
-        res.clearCookie('jwt');
+        console.log("inside the backend logout function");
+        res.clearCookie('jwt', {
+            httpOnly: true,  // xss security
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict", //csrf security
+        });
+
         res.json({ message: "logout successfully" });
     } catch (error) {
         console.log(error);
         console.log("error in usercontroller (logout)")
+    }
+}
+
+export const alluser = async (req, res) => {
+
+    try {
+        const users = await User.find({ _id: { $ne: req.user._id } }).select('-password');
+        res.json(users);
+    } catch (error) {
+        console.error("Error in alluser controller", error);
+        res.status(500).json({ message: "Server error" });
     }
 }

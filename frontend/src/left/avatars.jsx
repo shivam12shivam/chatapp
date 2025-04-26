@@ -1,23 +1,60 @@
-import React from 'react'
-import Singleuser from './components/singleuser'
+import React, { useEffect, useState } from 'react';
+import Singleuser from './components/singleuser';
+import axios from 'axios';
+import { setSelectedUser, setMessages, setSelectedUsername } from '../redux/userSlice';
+import {useDispatch} from "react-redux";
 
 function Avatars() {
-    return (
-        <>
-        <div className='overflow-hidden'>
-            <Singleuser/>
-            <Singleuser/>
-            <Singleuser/>
-            <Singleuser/>
-            <Singleuser/>
-            <Singleuser/>
-            <Singleuser/>
-            <Singleuser/>            
-            </div>
-        </>
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedUserIdcolor, setSelectedUserIdcolor] = useState(null);
+  const dispatch=useDispatch();
 
+  const handleclick = async (user)=>{
+    console.log("messages retrived");
+    dispatch(setSelectedUser(user._id));
+    dispatch(setSelectedUsername(user.name));
+    setSelectedUserIdcolor(user._id);
+    console.log("receivers id: ",user._id);
+    const msg=await axios.get(`http://localhost:3000/message/get/${user._id}`);
+    console.log(msg.data);
+    dispatch(setMessages(msg.data));
+  }
 
-    )
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/user/all", {
+          withCredentials: true,
+        });
+        setUsers(res.data);
+      } catch (err) {
+        console.error("Failed to fetch users:", err);
+        setError("Unable to load users.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    getUsers();
+  }, []);
+
+  if (loading) return <p className="text-center">Loading...</p>;
+  if (error) return <p className="text-center text-red-500">{error}</p>;
+
+  return (
+    <div className='max-h-[650px] overflow-y-auto scrollbar-hide'>
+      {users && users.length > 0 ? (
+        users.map((user) => (
+          <div key={user._id} className={`hover:cursor-pointer hover:bg-gray-500 ${(selectedUserIdcolor===user._id)?('bg-gray-800'):('')}`} onClick={()=>{handleclick(user)}}>
+            <Singleuser name={user.name} />
+          </div>
+        ))
+      ) : (
+        <p className="text-center">No users found.</p>
+      )}
+    </div>
+  );
 }
 
-export default Avatars
+export default Avatars;

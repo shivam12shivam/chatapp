@@ -1,12 +1,13 @@
 import express from "express"
-import { signup, signin, logout } from "../controllers/usercontroller.js";
+import { signup, signin, logout, alluser } from "../controllers/usercontroller.js";
 import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
 router.post("/signup", signup);
 router.post("/signin", signin);
-router.post("/logout", logout);
+router.get("/logout", logout);
+router.get("/all",protect,alluser);
 router.get('/me', protect, async (req, res) => {
   try {
     res.status(200).json({

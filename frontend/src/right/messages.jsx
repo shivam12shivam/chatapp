@@ -1,17 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-function Messages() {
-    return (
-        <div>
-            <div className="chat chat-start p-2">
-                <div className="chat-bubble chat-bubble-accent">That's never been done in the history of the Jedi.</div>
-            </div>
-            <div className="chat chat-end p-2">
-                <div className="chat-bubble chat-bubble-info">Calm down, Anakin.</div>
-            </div>
-
+function Messages({ message, isSender }) {
+  return (
+    <div>
+      <div className={`chat ${isSender ? 'chat-end' : 'chat-start'} p-2`}>
+        <div className={`chat-bubble ${isSender ? 'chat-bubble-info' : 'chat-bubble-accent'}`}>
+          {message.message}
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-export default Messages
+export default Messages;
