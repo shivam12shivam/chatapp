@@ -20,8 +20,9 @@ function Type() {
                 { message },
                 { withCredentials: true }
             );
-
+            const sentMessage = res.data.message;
             // The backend will emit the socket event
+            socket.emit('newMessage', sentMessage);
             setMessage('');
         } catch (error) {
             console.error("Failed to send message:", error);

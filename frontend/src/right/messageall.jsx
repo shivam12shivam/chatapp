@@ -2,13 +2,14 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Messages from './messages';
 import useSocket from '../Socket/useSocket';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { setMessages } from '../redux/userSlice';
 function Messageall() {
   const messages = useSelector(state => state.auth.messages);
   const selectedUserId = useSelector(state => state.auth.selectedUserId);
   const socket = useSocket();
   const dispatch = useDispatch();
+  const bottomRef = useRef(null);
 
   useEffect(() => {
     if (socket) {
@@ -25,6 +26,13 @@ function Messageall() {
       if (socket) socket.off('newMessage');
     };
   }, [socket, messages, selectedUserId, dispatch]);
+
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, selectedUserId]);
+
 
   if (!selectedUserId) {
     return (
@@ -46,7 +54,9 @@ function Messageall() {
         ))
       ) : (
         <p className="text-gray-500">No messages yet</p>
+
       )}
+      <div ref={bottomRef} /> {/* Dummy div for scroll reference */}
     </div>
   );
 }
