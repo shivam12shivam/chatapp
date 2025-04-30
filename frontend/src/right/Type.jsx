@@ -29,6 +29,13 @@ function Type() {
         }
     };
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault(); // Prevent default form submission behavior
+            handleSend();
+        }
+    }
+
     return (
         <div className='flex gap-x-2 p-2'>
             <div className='w-full text-white'>
@@ -37,6 +44,7 @@ function Type() {
                     placeholder='Type here'
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     className='input input-bordered w-full grow outline-none bg-slate-900'
                 />
             </div>

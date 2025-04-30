@@ -6,7 +6,8 @@ const initialState = {
   loading: true,
   selectedUserId: null,
   selectedUsername:null,
-  messages: []
+  messages: [],
+  searchword: "",
 };
 
 const authSlice = createSlice({
@@ -30,8 +31,11 @@ const authSlice = createSlice({
     setMessages: (state, action) => {
       state.messages = action.payload;
     },
+    setSearchword:(state,action)=>{
+      state.searchword=action.payload;
+    }
   },
 });
 
-export const { setUser, logout, setSelectedUser, setMessages, setSelectedUsername} = authSlice.actions;
+export const { setUser, logout, setSelectedUser, setMessages, setSelectedUsername, setSearchword} = authSlice.actions;
 export default authSlice.reducer;
