@@ -4,17 +4,20 @@ import { useDispatch } from "react-redux"
 import { logout } from '../redux/userSlice';
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
-
+import useSocket from '../Socket/useSocket';
 
 function Logout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const socket = useSocket();
   const handleclick = async () => {
     try {
       console.log("inside handle click")
       await axios.get("http://localhost:3000/user/logout", { withCredentials: true });
       dispatch(logout());
+      if (socket) {
+        socket.disconnect();
+      }
       console.log("inside handle click 2")
       navigate("/signin");
     } catch (error) {

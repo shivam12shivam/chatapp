@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import Profile from '../left/components/profile';
 
 function Profilebox() {
   const SelectedUsername = useSelector(state => state.auth.selectedUsername);
-  const [selectedUser, setSelectedUser] = useState(null);
-
+  const user=useSelector(state=>state.auth.user);
+  
   if (!SelectedUsername) {
     return (
       <div className='w-full bg-sky-600 h-22 flex flex-col justify-end'>

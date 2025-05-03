@@ -53,7 +53,8 @@ function Avatars() {
       {users && users.length > 0 ? (
         users.map((user) => (
           <div key={user._id} className={`hover:cursor-pointer hover:bg-gray-500 ${(selectedUserIdcolor === user._id) ? ('bg-gray-800') : ('')}`} onClick={() => { handleclick(user) }}>
-            <Singleuser name={user.name} />
+            <Singleuser name={user.name} isOnline={user.isOnline} />
+            
           </div>
         ))
       ) : (

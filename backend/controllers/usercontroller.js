@@ -15,7 +15,8 @@ export const signup = async (req, res) => {
         const newuser = await new User({
             name,
             email,
-            password
+            password,
+            isOnline: true,
         });
 
 
@@ -55,6 +56,9 @@ export const signin = async (req, res) => {
 
         createtokenandsavecookie(user._id, res);
 
+        const userId = user._id;
+        await User.findByIdAndUpdate(userId, { isOnline: true });
+
         return res.json({
             name: user.name,
             email: user.email,
@@ -70,6 +74,8 @@ export const signin = async (req, res) => {
 export const logout = async (req, res) => {
     try {
         console.log("inside the backend logout function");
+        const userId = req.user._id;
+        await User.findByIdAndUpdate(userId, { isOnline: false });
         res.clearCookie('jwt', {
             httpOnly: true,  // xss security
             secure: process.env.NODE_ENV === "production",

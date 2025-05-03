@@ -30,17 +30,12 @@ io.on("connection", (socket) => {
     // used to send the events to all connected users
     io.emit("getOnlineUsers", Object.keys(users));
     socket.on("sendMessage", async (messageData) => {
-        // 1) (Optional) persist to DB here and get back savedMsg
 
         const savedMsg = messageData; // or the result from your DB
-
-        // 2) Emit to recipient
         const recSocketId = users[messageData.receiverId];
         if (recSocketId) {
             io.to(recSocketId).emit("newMessage", savedMsg);
         }
-
-        // 3) Also emit back to the sender so they see it immediately
         socket.emit("newMessage", savedMsg);
     });
 

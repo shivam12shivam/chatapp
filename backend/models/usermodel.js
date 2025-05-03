@@ -17,8 +17,11 @@ const Userschema=mongoose.Schema({
     confirm_password:{
         type:String,
         requie:true,
-    }
-
+    },
+    isOnline:{
+        type:Boolean,
+        default:false,
+    },
 
 },
 
