@@ -11,6 +11,10 @@ function Avatars() {
   const [selectedUserIdcolor, setSelectedUserIdcolor] = useState(null);
   const dispatch = useDispatch();
   const name = useSelector(state => state.auth.searchword);
+  const online = useSelector((s) => s.auth.onlineUsers);
+  online.map((user) => {
+    console.log("online users:-  ", user);
+  })
 
   const handleclick = async (user) => {
     console.log("messages retrived");
@@ -29,7 +33,7 @@ function Avatars() {
         const res = await axios.get("http://localhost:3000/user/all", {
           withCredentials: true,
         });
-        const filteredUsers = (name && name.length>0)
+        const filteredUsers = (name && name.length > 0)
           ? res.data.filter(user =>
             user.name.toLowerCase().startsWith(name.toLowerCase())
           )
@@ -51,12 +55,15 @@ function Avatars() {
   return (
     <div className='max-h-[650px] min-h-[200px] w-auto overflow-y-auto scrollbar-hide bg-[rgb(147,118,197)] mt-3 rounded-2xl p-1 pt-0 '>
       {users && users.length > 0 ? (
-        users.map((user) => (
-          <div key={user._id} className={`hover:cursor-pointer rounded-4xl hover:bg-[rgb(166,143,205)] ${(selectedUserIdcolor === user._id) ? ('bg-[rgb(166,143,205)]') : ('bg-[rgb(135,100,196)]')}`} onClick={() => { handleclick(user) }}>
-            <Singleuser name={user.name} isOnline={user.isOnline} />
-            
-          </div>
-        ))
+        users.map((user) => {
+          const isOnline = online.includes(user._id);
+          return (
+            <div key={user._id} className={`hover:cursor-pointer rounded-4xl hover:bg-[rgb(166,143,205)] ${(selectedUserIdcolor === user._id) ? ('bg-[rgb(166,143,205)]') : ('bg-[rgb(135,100,196)]')}`} onClick={() => { handleclick(user) }}>
+              <Singleuser name={user.name} isOnline={isOnline} />
+
+            </div>
+          )
+        })
       ) : (
         <p className="text-center">No users found.</p>
       )}

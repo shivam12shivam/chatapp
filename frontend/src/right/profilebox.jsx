@@ -8,10 +8,8 @@ function Profilebox() {
   
   if (!SelectedUsername) {
     return (
-      <div className=' bg-[rgb(96,87,125)] w-full h-22 flex flex-col justify-end'>
-        <div className="p-2 flex items-center justify-center">
-          <p className="text-white">Select a user to start chatting</p>
-        </div>
+      <div className=' bg-[rgb(147,118,197)] w-full h-22 flex items-center flex-col justify-center rounded-2xl mt-2'>
+          <p className="text-white">SELECT A USER TO START CHATTING</p>
       </div>
     );
   }

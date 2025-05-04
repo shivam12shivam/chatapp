@@ -1,6 +1,6 @@
 import User from "../models/usermodel.js";
 import createtokenandsavecookie from "../jwt/generatetoken.js";
-
+import {io, getReceiverSocketId} from "../SocketIO/server.js";
 export const signup = async (req, res) => {
     try {
         const { name, email, password, confirm_password } = req.body;
@@ -76,6 +76,11 @@ export const logout = async (req, res) => {
         console.log("inside the backend logout function");
         const userId = req.user._id;
         await User.findByIdAndUpdate(userId, { isOnline: false });
+        
+        const sockId=getReceiverSocketId(userId.toString());
+        if(sockId && io.sockets.sockets.get(sockId)){
+            io.sockets.sockets.get(sockId).disconnect(true);
+        }
         res.clearCookie('jwt', {
             httpOnly: true,  // xss security
             secure: process.env.NODE_ENV === "production",

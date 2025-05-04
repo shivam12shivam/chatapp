@@ -6,7 +6,7 @@ function Messages({ message, isSender }) {
       <div
         className={`
           p-3 max-w-xs rounded-2xl  text-white text-shadow-2xs text-shadow-black break-words whitespace-pre-wrap text-left
-          ${isSender ? 'bg-[rgb(205,141,104)]' : 'bg-[rgb(130,140,244)]'}
+          ${isSender ? 'bg-[rgb(205,141,104)]' : 'bg-[rgb(85,98,242)]'}
         `}
       >
         {message.message}

@@ -8,6 +8,7 @@ const initialState = {
   selectedUsername:null,
   messages: [],
   searchword: "",
+  onlineUsers: [],
 };
 
 const authSlice = createSlice({
@@ -35,18 +36,10 @@ const authSlice = createSlice({
       state.searchword=action.payload;
     },
     setOnlineUsers: (state, action) => {
-      state.onlineUsers = action.payload;
+      state.onlineUsers = action.payload; 
     },
-    addOnlineUser: (state, action) => {
-      if (!state.onlineUsers.includes(action.payload)) {
-        state.onlineUsers.push(action.payload);
-      }
-    },
-    removeOnlineUser: (state, action) => {
-      state.onlineUsers = state.onlineUsers.filter(id => id !== action.payload);
-    }
   },
 });
 
-export const { setUser, logout, setSelectedUser, setMessages, setSelectedUsername, setSearchword} = authSlice.actions;
+export const { setUser, logout, setSelectedUser, setMessages, setSelectedUsername, setSearchword ,setOnlineUsers} = authSlice.actions;
 export default authSlice.reducer;
