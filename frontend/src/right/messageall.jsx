@@ -43,7 +43,7 @@ function Messageall() {
   }
 
   return (
-    <div className='p-4 overflow-y-auto max-h-[calc(100vh-180px)]'>
+    <div className='p-4 overflow-y-auto max-h-[calc(100vh-180px)] '>
       {messages.length > 0 ? (
         messages.map((message, index) => (
           <Messages

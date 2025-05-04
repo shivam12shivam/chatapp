@@ -49,10 +49,10 @@ function Avatars() {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <div className='max-h-[650px] overflow-y-auto scrollbar-hide'>
+    <div className='max-h-[650px] min-h-[200px] w-auto overflow-y-auto scrollbar-hide bg-[rgb(147,118,197)] mt-3 rounded-2xl p-1 pt-0 '>
       {users && users.length > 0 ? (
         users.map((user) => (
-          <div key={user._id} className={`hover:cursor-pointer hover:bg-gray-500 ${(selectedUserIdcolor === user._id) ? ('bg-gray-800') : ('')}`} onClick={() => { handleclick(user) }}>
+          <div key={user._id} className={`hover:cursor-pointer rounded-4xl hover:bg-[rgb(166,143,205)] ${(selectedUserIdcolor === user._id) ? ('bg-[rgb(166,143,205)]') : ('bg-[rgb(135,100,196)]')}`} onClick={() => { handleclick(user) }}>
             <Singleuser name={user.name} isOnline={user.isOnline} />
             
           </div>

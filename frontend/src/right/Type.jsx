@@ -38,19 +38,19 @@ function Type() {
 
     return (
         <div className='flex gap-x-2 p-2'>
-            <div className='w-full text-white'>
+            <div className='w-full text-black'>
                 <input
                     type="text"
                     placeholder='Type here'
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className='input input-bordered w-full grow outline-none bg-slate-900'
+                    className='input input-bordered w-full rounded-2xl grow outline-none bg-gray-200'
                 />
             </div>
             <button
                 onClick={handleSend}
-                className={`text-2xl ${selectedUserId ? 'text-blue-500' : 'text-gray-500'} hover:cursor-pointer`}
+                className={`text-3xl ${selectedUserId ? 'text-[rgb(77,252,220)]' : 'text-gray-500'} hover:cursor-pointer`}
                 disabled={!selectedUserId}
             >
                 <IoSend />
