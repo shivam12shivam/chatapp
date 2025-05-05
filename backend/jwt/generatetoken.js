@@ -8,7 +8,7 @@ const createtokenandsavecookie=(userid,res)=>{
         httpOnly:true,  // xss security
         // secure:true,
         secure: process.env.NODE_ENV === "production",
-        sameSite:"strict", //csrf security
+        sameSite:"none", //csrf security
     });
     return token;
 }
