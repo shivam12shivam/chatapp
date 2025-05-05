@@ -1,6 +1,6 @@
 import User from "../models/usermodel.js";
 import createtokenandsavecookie from "../jwt/generatetoken.js";
-import {io, getReceiverSocketId} from "../SocketIO/server.js";
+import { io, getReceiverSocketId } from "../SocketIO/server.js";
 export const signup = async (req, res) => {
     try {
         const { name, email, password, confirm_password } = req.body;
@@ -22,11 +22,13 @@ export const signup = async (req, res) => {
 
         await newuser.save().then(() => {
             console.log("new user created");
-            createtokenandsavecookie(newuser._id, res);
+            const token = createtokenandsavecookie(newuser._id, res);
             return res.json({
-                name: newuser.name,
-                email: newuser.email,
-                _id: newuser._id,
+                user: {
+                    name: newuser.name,
+                    email: newuser.email,
+                    _id: newuser._id,
+                }, token
             });
 
         });
@@ -76,9 +78,9 @@ export const logout = async (req, res) => {
         console.log("inside the backend logout function");
         const userId = req.user._id;
         await User.findByIdAndUpdate(userId, { isOnline: false });
-        
-        const sockId=getReceiverSocketId(userId.toString());
-        if(sockId && io.sockets.sockets.get(sockId)){
+
+        const sockId = getReceiverSocketId(userId.toString());
+        if (sockId && io.sockets.sockets.get(sockId)) {
             io.sockets.sockets.get(sockId).disconnect(true);
         }
         res.clearCookie('jwt', {
