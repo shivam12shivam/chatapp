@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Singleuser from './components/singleuser';
+import Singleuser from './components/Singleuser';
 import axios from 'axios';
 import { setSelectedUser, setMessages, setSelectedUsername } from '../redux/userSlice';
 import { useDispatch, useSelector } from "react-redux";
