@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "https://chatapp-six-lilac.vercel.app/",
+        origin: "https://chatapp-six-lilac.vercel.app",
         methods: ["GET", "POST"],
     },
 });
