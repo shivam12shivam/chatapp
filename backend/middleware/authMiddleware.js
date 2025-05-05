@@ -8,10 +8,8 @@ export const protect =async  (req, res, next) => {
   
   console.log("token:- ", token);
   console.log("envtoken:- ", process.env.jwt_token);
-  if (!token && req.headers.authorization) {
-    token = req.headers.authorization.split(" ")[1];
-  }
-  else if (!token) {
+  
+  if (!token) {
     console.log("looking for token");
     return res.status(401).json({ message: "Not authorized, no token" });
   }

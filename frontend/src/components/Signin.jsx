@@ -7,29 +7,26 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const Signin = () => {
-  const navigate = useNavigate()
+  const navigate=useNavigate()
   const dispatch = useDispatch();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
     console.log('Signin Data:', data);
     try {
-      const res = await axios.post("https://chatapp-doyk.onrender.com/user/signin", data, { withCredentials: true });
+      const res = await axios.post("https://chatapp-doyk.onrender.com/user/signin", data,{ withCredentials: true });
       if (res.data && res.data._id) {
         console.log(res.data);
-        if (res.data.token) {
-          localStorage.setItem("jwt", res.data.token);
-          axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
-        }
-        dispatch(setUser(res.data));
-        navigate("/");
+        
+        dispatch(setUser(res.data)); 
+        navigate("/");               
       }
-
+      
       else {
         console.log("user does not exist or password or email is wrong");
         return;
       }
-
+      
     } catch (error) {
       console.log(error);
       console.log("error in signin form - frontend");
@@ -40,7 +37,7 @@ const Signin = () => {
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-6">Sign In</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-
+  
           <div>
             <input
               type="email"
@@ -50,7 +47,7 @@ const Signin = () => {
             />
             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
           </div>
-
+  
           <div>
             <input
               type="password"
@@ -60,7 +57,7 @@ const Signin = () => {
             />
             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
           </div>
-
+  
           <button
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition duration-300"
@@ -68,7 +65,7 @@ const Signin = () => {
             Sign In
           </button>
         </form>
-
+  
         <p className="text-center text-gray-600 mt-6">
           Don't have an account?{" "}
           <Link to="/signup" className="text-blue-500 hover:underline font-semibold">
