@@ -12,7 +12,7 @@ app.use(cookieParser());
 const Port=process.env.port || 3000;
 const mongourl=process.env.Url;
 app.use(cors({
-    origin: "https://chatapp-3y9e.vercel.app/",  // your frontend URL
+    origin: "https://chatapp-six-lilac.vercel.app/",  // your frontend URL
     credentials: true                 // allow cookies to be sent
   }));
 
