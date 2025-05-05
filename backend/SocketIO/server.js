@@ -8,6 +8,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
         origin: "https://chatapp-six-lilac.vercel.app",
+        withCredentials: true, 
         methods: ["GET", "POST"],
     },
 });
