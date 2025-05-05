@@ -1,7 +1,7 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 import Home from './home'
-import Signin from './components/signin'
+import Signin from './components/Signin'
 import Signup from './components/Signup'
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
