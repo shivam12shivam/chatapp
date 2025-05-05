@@ -17,7 +17,7 @@ export function SocketProvider({ children }) {
       setSocket(null);
     }
     if (user?._id && !socket) {
-      const s = io('http://localhost:3000', {
+      const s = io('https://chatapp-doyk.onrender.com/', {
         withCredentials: true,
         query: { userId: user._id },
         transports: ['websocket'],

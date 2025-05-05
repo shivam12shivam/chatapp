@@ -14,7 +14,7 @@ const Signin = () => {
   const onSubmit = async (data) => {
     console.log('Signin Data:', data);
     try {
-      const res = await axios.post("http://localhost:3000/user/signin", data);
+      const res = await axios.post("https://chatapp-doyk.onrender.com/user/signin", data);
       if (res.data && res.data._id) {
         console.log(res.data);
         dispatch(setUser(res.data)); 

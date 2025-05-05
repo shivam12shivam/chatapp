@@ -16,7 +16,7 @@ function Type() {
 
         try {
             const res = await axios.post(
-                `http://localhost:3000/message/send/${selectedUserId}`,
+                `https://chatapp-doyk.onrender.com/message/send/${selectedUserId}`,
                 { message },
                 { withCredentials: true }
             );

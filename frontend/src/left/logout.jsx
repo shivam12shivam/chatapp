@@ -13,7 +13,7 @@ function Logout() {
   const handleclick = async () => {
     try {
       console.log("inside handle click")
-      await axios.get("http://localhost:3000/user/logout", { withCredentials: true });
+      await axios.get("https://chatapp-doyk.onrender.com/user/logout", { withCredentials: true });
       dispatch(logout());
       if (socket) {
         socket.disconnect();

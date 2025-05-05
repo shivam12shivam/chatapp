@@ -22,7 +22,7 @@ function Avatars() {
     dispatch(setSelectedUsername(user.name));
     setSelectedUserIdcolor(user._id);
     console.log("receivers id: ", user._id);
-    const msg = await axios.get(`http://localhost:3000/message/get/${user._id}`);
+    const msg = await axios.get(`https://chatapp-doyk.onrender.com/message/get/${user._id}`);
     console.log(msg.data);
     dispatch(setMessages(msg.data));
   }
@@ -30,7 +30,7 @@ function Avatars() {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/user/all", {
+        const res = await axios.get("https://chatapp-doyk.onrender.com/user/all", {
           withCredentials: true,
         });
         const filteredUsers = (name && name.length > 0)

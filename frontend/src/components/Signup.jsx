@@ -20,7 +20,7 @@ const Signup = () => {
   const onSubmit = async (data) => {
     console.log('Signup Data:', data);
     try {
-      const res = await axios.post("http://localhost:3000/user/signup", data);
+      const res = await axios.post("https://chatapp-doyk.onrender.com/user/signup", data);
       console.log("asas");
 
       console.log(res.data);

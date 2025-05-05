@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const { data } = await axios.get('http://localhost:3000/user/me');
+        const { data } = await axios.get('https://chatapp-doyk.onrender.com/user/me');
         // backend responds { user: { _id, name, email } }
         console.log(data);
         dispatch(setUser(data.user));          // ← now Redux knows you’re logged in
