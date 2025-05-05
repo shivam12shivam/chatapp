@@ -53,7 +53,7 @@ function Avatars() {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <div className='max-h-[650px] min-h-[200px] w-auto overflow-y-auto scrollbar-hide bg-[rgb(147,118,197)] mt-3 rounded-2xl p-1 pt-0 '>
+    <div className='max-h-[650px]   md:min-h-[200px] w-auto overflow-y-auto scrollbar-hide bg-[rgb(147,118,197)] mt-3 rounded-2xl pb-6 '>
       {users && users.length > 0 ? (
         users.map((user) => {
           const isOnline = online.includes(user._id);

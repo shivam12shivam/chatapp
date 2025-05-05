@@ -10,13 +10,13 @@ import { CssBaseline } from '@mui/material';
 axios.defaults.withCredentials = true;
 
 createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <CssBaseline/>
         <App />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 
 )
