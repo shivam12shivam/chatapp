@@ -27,7 +27,7 @@ function Logout() {
   return (
     <button type="submit" onClick={handleclick}>
       <div className='hover:cursor-pointer'>
-        <RiLogoutBoxLine className='text-3xl pb-1' />
+        <RiLogoutBoxLine className='text-2xl md:text-3xl pb-1' />
       </div>
     </button>
   )

@@ -11,7 +11,7 @@ function Search() {
   }, [word]);
 
   return (
-    <div className='w-60 flex rgb(92, 80, 130)'>
+    <div className=' w-24 md:w-60 flex rgb(92, 80, 130)'>
       
       <input type="text" placeholder="Type here" className="input rounded-3xl" value={word} onChange={(e) => {
         setWord(e.target.value);
