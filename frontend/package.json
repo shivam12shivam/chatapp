@@ -28,7 +28,7 @@
     "tailwindcss": "^4.1.4"
   },
   "engines": {
-    "node": "25.x"
+    "node": "22.x"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
