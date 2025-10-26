@@ -11,6 +11,9 @@
     "start":"node index.js",
     "build":"npm install"
   },
+  "engines": {
+    "node": "25.0.0"
+  },
   "dependencies": {
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",

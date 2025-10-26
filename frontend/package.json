@@ -27,6 +27,9 @@
     "socket.io-client": "^4.8.1",
     "tailwindcss": "^4.1.4"
   },
+  "engines": {
+    "node": "25.0.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
     "@types/react": "^19.0.10",
